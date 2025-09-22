@@ -3,304 +3,170 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Platypus - A rede que nasceu do improvável</title>
+  <title>Platypus - Sua rede social, suas regras.</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    .animate-slide-up {
-      animation: slideUp 0.8s ease-out forwards;
-    }
-    .animate-fade-in {
-      animation: fadeIn 1.2s ease-in forwards;
-    }
-    .carousel-slide {
-      transition: transform 0.5s ease-in-out;
-    }
-    .mascot-hover:hover, .mascot-hover:active {
-      transform: scale(1.1) rotate(5deg);
-      transition: transform 0.3s ease;
-    }
-    .card-hover:hover, .card-hover:active {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 16px rgba(236, 72, 153, 0.3);
-      transition: all 0.3s ease;
-    }
-    .parallax-bg {
-      background: linear-gradient(to bottom, #111827, #1f2937);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transform: translateY(0);
-      transition: transform 0.1s ease;
-    }
-    .typing {
-      display: inline-block;
-      overflow: hidden;
-      white-space: nowrap;
-      animation: typing 2.5s steps(60, end) forwards;
-    }
-    .progress-bar {
-      transition: width 1s ease-in-out;
-    }
-    @keyframes slideUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    .scroll-animate {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .scroll-animate.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* Animação da Platycoin */
-    .coin-animate {
-      animation: jumpAndSpin 2.5s ease-in-out infinite;
-      transform-style: preserve-3d;
-    }
-    /* Adiciona perspectiva ao contêiner para o efeito 3D */
-    .coin-container {
-      perspective: 1000px;
-    }
-    @keyframes jumpAndSpin {
-      0% {
-        transform: translateY(0) rotateY(0deg);
-      }
-      20% {
-        transform: translateY(-20px); /* Primeiro pulo */
-      }
-      40% {
-        transform: translateY(0); /* Volta ao chão */
-      }
-      60% {
-        transform: translateY(-20px); /* Segundo pulo */
-      }
-      80% {
-        transform: translateY(0); /* Volta ao chão */
-      }
-      100% {
-        transform: translateY(0) rotateY(360deg); /* Gira como moeda */
-      }
-    }
-    /* Mobile-Specific Styles */
-    @media (max-width: 768px) {
-      .parallax-bg {
-        transform: translateY(0) !important; /* Disable heavy parallax on mobile */
-      }
-      .typing {
-        white-space: normal; /* Allow text wrap */
-      }
-      .mascot-gallery img {
-        width: 80px;
-        height: 80px;
-      }
-      .carousel-slide img {
-        width: 120px;
-        height: 120px;
-      }
-      .progress-bar-container {
-        width: 80%;
-      }
-      nav .nav-links {
-        display: none;
-      }
-      nav .nav-links.active {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: #111827;
-        padding: 1rem;
-      }
-    }
-  </style>
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-950 text-white font-['Inter']">
-  <!-- Navigation Bar with Hamburger Menu -->
+  
   <nav class="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md z-50 py-4 px-4 sm:px-8 flex justify-between items-center">
     <div class="text-2xl font-bold text-pink-400">Platypus</div>
     <div class="nav-links hidden md:flex gap-6">
-      <a href="#features" class="text-gray-300 hover:text-pink-400 transition">Funcionalidades</a>
-      <a href="#events" class="text-gray-300 hover:text-pink-400 transition">Eventos</a>
-      <a href="#shop" class="text-gray-300 hover:text-pink-400 transition">Lojinha</a>
+      <a href="#manifesto" class="text-gray-300 hover:text-pink-400 transition">O Manifesto</a>
+      <a href="#features" class="text-gray-300 hover:text-pink-400 transition">Diferenciais</a>
+      <a href="#partners" class="text-gray-300 hover:text-pink-400 transition">Parcerias</a>
       <a href="#faq" class="text-gray-300 hover:text-pink-400 transition">FAQ</a>
     </div>
-    <button id="hamburger" class="md:hidden text-pink-400 focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
-    <a href="#join" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-colors duration-300 text-sm sm:text-base">🔮 Beta</a>
+    <div class="flex items-center gap-4">
+      <button id="hamburger" class="md:hidden text-pink-400 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      <a href="#join" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-colors duration-300 text-sm sm:text-base">🔮 Beta</a>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
+  <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90 w-full fixed top-16 left-0 z-40 flex flex-col items-center gap-4 py-4">
+    <a href="#manifesto" class="text-gray-300 hover:text-pink-400 transition">O Manifesto</a>
+    <a href="#features" class="text-gray-300 hover:text-pink-400 transition">Diferenciais</a>
+    <a href="#partners" class="text-gray-300 hover:text-pink-400 transition">Parcerias</a>
+    <a href="#faq" class="text-gray-300 hover:text-pink-400 transition">FAQ</a>
+  </div>
+
   <section class="min-h-screen relative flex flex-col items-center justify-center p-4 sm:p-8 text-center overflow-hidden">
     <div class="parallax-bg"></div>
-    <div class="relative z-10">
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-pink-400 mb-6 animate-slide-up">Platypus</h1>
-      <p class="text-base sm:text-lg md:text-2xl text-gray-300 max-w-3xl mb-8 animate-slide-up typing" style="animation-delay: 0.2s;">
-        Uma rede social diferente, nascida de uma ideia improvável.<br>
-        Aqui, você cria, conecta e descobre em um espaço que é <span class="text-pink-300">só seu</span>.<br>
-        De chats com IA personalizáveis a eventos semanais, a Platypus é o seu refúgio digital.
+    <div class="relative z-10 flex flex-col items-center justify-center">
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-pink-400 mb-6 animate-slide-up">Sua rede social, suas regras.</h1>
+      <p class="text-base sm:text-lg md:text-2xl text-gray-300 max-w-3xl mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+        Cansado de algoritmos que decidem o que você vê? Na Platypus, <span class="text-pink-300">você está no controle do seu feed</span>.
+        Uma comunidade que constrói junto, sem rastreamento e sem conteúdo que você não pediu.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 animate-slide-up" style="animation-delay: 0.4s;">
-        <a href="#join" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 sm:px-8 rounded-full shadow-lg transform hover:scale-105 transition-colors duration-300 text-sm sm:text-base">🔮 Entrar na Beta</a>
-        <a href="#manifesto" class="border border-pink-400 text-pink-400 hover:bg-pink-500 hover:text-white py-3 px-6 sm:px-8 rounded-full transform hover:scale-105 transition-colors duration-300 text-sm sm:text-base">🌱 Manifesto</a>
-      </div>
-      <div class="mt-8 sm:mt-12 animate-fade-in flex flex-wrap gap-4 justify-center">
-        <div class="mascot-gallery cursor-pointer" data-desc="Opa, o mascote curioso! Sempre explorando novos refúgios.">
-          <img src="./opa.png" alt="Mascote Opa" class="w-20 sm:w-32 h-20 sm:h-32 mascot-hover">
-        </div>
-        <div class="mascot-gallery cursor-pointer" data-desc="Que Isso? O mascote misterioso com segredos a revelar!">
-          <img src="./que_isso.png" alt="Mascote Que Isso" class="w-20 sm:w-32 h-20 sm:h-32 mascot-hover">
-        </div>
-      </div>
-      <div id="mascot-description" class="text-gray-300 text-xs sm:text-sm mt-4 hidden max-w-xs mx-auto"></div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section id="features" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-900">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-8 sm:mb-12 scroll-animate">O que faz a Platypus brilhar?</h2>
-    <div class="max-w-6xl mx-auto grid grid-cols-1 gap-6 sm:gap-8">
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg card-hover scroll-animate">
-        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Chats com IA Personalizáveis</h3>
-        <p class="text-gray-300 text-sm sm:text-base">Converse com uma IA que reflete a personalidade que você escolher: um gamer épico, um sábio zen ou até um dev sarcástico.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg card-hover scroll-animate">
-        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Refúgios Únicos</h3>
-        <p class="text-gray-300 text-sm sm:text-base">Monte seu espaço com temas, cores e funcionalidades exclusivas, do jeito que você sempre quis.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg card-hover scroll-animate">
-        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Mascotes e Badges</h3>
-        <p class="text-gray-300 text-sm sm:text-base">Desbloqueie mascotes misteriosos e ganhe badges exclusivas ao interagir, conversar e explorar a plataforma.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.4s;">
+        <a href="#join" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 sm:px-8 rounded-full shadow-lg transform hover:scale-105 transition-colors duration-300 text-sm sm:text-base">🔮 Quero Acesso à Beta</a>
+        <a href="#manifesto" class="border border-pink-400 text-pink-400 hover:bg-pink-500 hover:text-white py-3 px-6 sm:px-8 rounded-full transform hover:scale-105 transition-colors duration-300 text-sm sm:text-base">🌱 Nosso Manifesto</a>
       </div>
     </div>
   </section>
 
-  <!-- Weekly Events Section -->
-  <section id="events" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-950">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-8 sm:mb-12 scroll-animate">Eventos Semanais Épicos</h2>
-    <p class="text-sm sm:text-lg text-gray-300 text-center max-w-3xl mx-auto mb-8 sm:mb-10 scroll-animate">
-      Participe de eventos temáticos toda semana, desde caças a mascotes até competições de design de refúgios.<br>
-      Ganhe Platycoins e desbloqueie recompensas exclusivas!
-    </p>
-    <div class="max-w-5xl mx-auto grid grid-cols-1 gap-6 sm:gap-8">
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg card-hover scroll-animate">
-        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Caça ao Mascote</h3>
-        <p class="text-gray-300 text-sm sm:text-base">Encontre mascotes escondidos pela plataforma e ganhe Platycoins para a lojinha.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg card-hover scroll-animate">
-        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Refúgio da Semana</h3>
-        <p class="text-gray-300 text-sm sm:text-base">Mostre seu refúgio criativo e concorra a badges e reconhecimento na comunidade.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Platycoins & Shop Section -->
-  <section id="shop" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-900">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-8 sm:mb-12 scroll-animate">Lojinha Platypus</h2>
-    <p class="text-sm sm:text-lg text-gray-300 text-center max-w-3xl mx-auto mb-8 sm:mb-10 scroll-animate">
-      Use <span class="text-pink-400">Platycoins</span> para comprar temas, mascotes, efeitos visuais e mais na nossa lojinha.<br>
-      Ganhe moedas participando de eventos e interagindo na plataforma!
-    </p>
-    <div class="max-w-6xl mx-auto flex justify-center">
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg card-hover scroll-animate flex items-center gap-4 coin-container">
-        <img src="./coin.png" alt="Platycoin" class="w-12 sm:w-16 h-12 sm:h-16 coin-animate">
+  <section id="manifesto" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-900">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-8 sm:mb-12 scroll-animate">Nascemos do Improvável, Guiados por Princípios</h2>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg scroll-animate flex items-start gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-400 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 16v-2m0-10v2M6 12H4m16 0h-2m-10 0h2m10 0h2M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg>
         <div>
-          <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-2">Platycoins</h3>
-          <p class="text-gray-300 text-sm sm:text-base">Moeda virtual para desbloquear itens exclusivos e personalizar sua experiência.</p>
+          <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-2">Seu Feed, Seu Controle</h3>
+          <p class="text-gray-300 text-sm sm:text-base">Sem algoritmos invasivos. Você escolhe os tópicos que te interessam, e é só isso que você vai ver. Simples e transparente.</p>
+        </div>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg scroll-animate flex items-start gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-400 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+        <div>
+          <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-2">Você Constrói o Futuro</h3>
+          <p class="text-gray-300 text-sm sm:text-base">Nossa comunidade sugere e vota em novas funcionalidades. As melhores ideias são desenvolvidas e quem sugeriu ganha reconhecimento.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Badges Carousel Section -->
-  <section class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-950">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-8 sm:mb-12 scroll-animate">Suas Conquistas</h2>
-    <div class="max-w-5xl mx-auto relative">
-      <div id="carousel" class="flex overflow-hidden touch-pan-x">
-        <div class="carousel-slide min-w-full flex justify-center">
-          <img src="https://placeimg.com/120/120/tech" alt="Mestre do Refúgio" class="w-24 sm:w-48 h-24 sm:h-48 mascot-hover">
-        </div>
-        <div class="carousel-slide min-w-full flex justify-center">
-          <img src="https://placeimg.com/120/120/animals" alt="Caçador de Mascotes" class="w-24 sm:w-48 h-24 sm:h-48 mascot-hover">
-        </div>
-        <div class="carousel-slide min-w-full flex justify-center">
-          <img src="https://placeimg.com/120/120/arch" alt="Rei das Platycoins" class="w-24 sm:w-48 h-24 sm:h-48 mascot-hover">
-        </div>
+  <section id="features" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-950">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-8 sm:mb-12 scroll-animate">Nossos Diferenciais</h2>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 scroll-animate">
+        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Ninhos de Interesses</h3>
+        <p class="text-gray-300 text-sm sm:text-base">Crie ou participe de comunidades moderadas por você e para você. Defina suas próprias regras e conecte-se com pessoas que têm a mesma paixão, sem o ruído do feed principal.</p>
       </div>
-      <button onclick="prevSlide()" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-pink-500 p-2 rounded-full transition-colors duration-300 hover:bg-pink-600">←</button>
-      <button onclick="nextSlide()" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-pink-500 p-2 rounded-full transition-colors duration-300 hover:bg-pink-600">→</button>
+      
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 scroll-animate">
+        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Privacidade por Padrão</h3>
+        <p class="text-gray-300 text-sm sm:text-base">Sua atividade na Platypus é sua. Não rastreamos seus cliques nem vendemos seus dados. Desfrute de uma experiência social genuína e livre de vigilância algorítmica.</p>
+      </div>
+      
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 scroll-animate">
+        <h3 class="text-lg sm:text-xl font-semibold text-pink-400 mb-4">Eventos e Conquistas</h3>
+        <p class="text-gray-300 text-sm sm:text-base">Participe de eventos semanais, ganhe Platycoins e colecione badges e mascotes exclusivos por suas contribuições e engajamento na comunidade.</p>
+      </div>
+
     </div>
   </section>
 
-  <!-- FAQ Section -->
+  <section id="partners" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-900">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-4 scroll-animate">Faça Parte do Ecossistema</h2>
+    <p class="text-sm sm:text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12 scroll-animate">
+      Acreditamos em crescimento transparente e em parcerias que agregam valor à nossa comunidade.
+    </p>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg scroll-animate text-center">
+        <h3 class="text-xl sm:text-2xl font-semibold text-pink-400 mb-4">Parcerias de Marca</h3>
+        <p class="text-gray-300 text-sm sm:text-base mb-6">Sua marca compartilha nossos valores? Vamos criar juntos eventos, conteúdos e experiências únicas para a comunidade Platypus.</p>
+        <a href="mailto:parcerias@platypus.app" class="border border-pink-400 text-pink-400 hover:bg-pink-500 hover:text-white py-2 px-6 rounded-full transition-colors duration-300">Seja um Parceiro</a>
+      </div>
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg scroll-animate text-center">
+        <h3 class="text-xl sm:text-2xl font-semibold text-pink-400 mb-4">Investidores</h3>
+        <p class="text-gray-300 text-sm sm:text-base mb-6">Estamos construindo o futuro das redes sociais com foco em sustentabilidade e na experiência do usuário. Conheça nossa visão.</p>
+        <a href="investidores.html" class="border border-pink-400 text-pink-400 hover:bg-pink-500 hover:text-white py-2 px-6 rounded-full transition-colors duration-300">Fale Conosco</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="commitment" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-950">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-pink-300 mb-6 scroll-animate">Nosso Compromisso com uma Comunidade Saudável</h2>
+      <p class="text-gray-300 mb-8 scroll-animate">Para proteger nosso ecossistema e garantir um ambiente seguro e positivo, não aceitamos parcerias, patrocínios ou anúncios de setores que consideramos prejudiciais à nossa comunidade. Isso inclui, mas não se limita a:</p>
+      <div class="flex flex-wrap justify-center gap-3 text-sm sm:text-base">
+        <span class="bg-red-900/50 text-red-300 py-1 px-3 rounded-full scroll-animate">❌ Casas de Apostas</span>
+        <span class="bg-red-900/50 text-red-300 py-1 px-3 rounded-full scroll-animate">❌ Conteúdo Adulto Explícito</span>
+        <span class="bg-red-900/50 text-red-300 py-1 px-3 rounded-full scroll-animate">❌ Desinformação e Discurso de Ódio</span>
+        <span class="bg-red-900/50 text-red-300 py-1 px-3 rounded-full scroll-animate">❌ Esquemas Financeiros Duvidosos</span>
+      </div>
+    </div>
+  </section>
+
   <section id="faq" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-900">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 text-center mb-8 sm:mb-12 scroll-animate">Perguntas Frequentes</h2>
     <div class="max-w-3xl mx-auto">
       <div class="mb-4 scroll-animate">
-        <button class="w-full text-left text-base sm:text-lg font-semibold text-pink-400 bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors duration-300" onclick="toggleFAQ(this)">
-          Como personalizo a IA do chat?
+        <button class="faq-button w-full text-left text-base sm:text-lg font-semibold text-pink-400 bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors duration-300 flex justify-between items-center">
+          <span>Como funciona o feed controlado?</span>
+          <span class="faq-icon transition-transform duration-300 transform">+</span>
         </button>
-        <div class="hidden text-gray-300 text-sm sm:text-base p-4 bg-gray-800 rounded-b-lg">
-          Escolha entre vários estilos de personalidade, como gamer, zen ou dev, e ajuste o tom para ser mais amigável, sério ou até irônico.
+        <div class="faq-content hidden text-gray-300 text-sm sm:text-base p-4 bg-gray-800 rounded-b-lg">
+          Ao se cadastrar, você escolhe os tópicos do seu interesse (ex: #games, #culinária). Seu feed principal mostrará apenas posts desses tópicos, em ordem cronológica ou de relevância, sem influência do seu histórico de visualização.
         </div>
       </div>
       <div class="mb-4 scroll-animate">
-        <button class="w-full text-left text-base sm:text-lg font-semibold text-pink-400 bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors duration-300" onclick="toggleFAQ(this)">
-          Como ganho Platycoins?
+        <button class="faq-button w-full text-left text-base sm:text-lg font-semibold text-pink-400 bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors duration-300 flex justify-between items-center">
+          <span>Como eu posso sugerir uma nova funcionalidade?</span>
+          <span class="faq-icon transition-transform duration-300 transform">+</span>
         </button>
-        <div class="hidden text-gray-300 text-sm sm:text-base p-4 bg-gray-800 rounded-b-lg">
-          Participe de eventos semanais, complete desafios e interaja na plataforma para acumular Platycoins.
-        </div>
-      </div>
-      <div class="mb-4 scroll-animate">
-        <button class="w-full text-left text-base sm:text-lg font-semibold text-pink-400 bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors duration-300" onclick="toggleFAQ(this)">
-          O que são badges?
-        </button>
-        <div class="hidden text-gray-300 text-sm sm:text-base p-4 bg-gray-800 rounded-b-lg">
-          Badges são recompensas visuais que você ganha por interações, como criar refúgios, participar de eventos ou desbloquear mascotes.
+        <div class="faq-content hidden text-gray-300 text-sm sm:text-base p-4 bg-gray-800 rounded-b-lg">
+          Dentro do app, haverá uma aba "Laboratório de Ideias", onde você poderá enviar suas sugestões e votar nas ideias de outros membros da comunidade.
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Join Beta Section -->
-  <section id="join" class="py-16 sm:py-20 px-4 sm:px-8 bg-gradient-to-b from-gray-900 to-gray-950 text-center">
+  <section id="join" class="py-16 sm:py-20 px-4 sm:px-8 bg-gray-950 text-center">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-300 mb-8 scroll-animate">Junte-se à Platypus</h2>
     <p class="text-sm sm:text-lg text-gray-300 max-w-2xl mx-auto mb-8 sm:mb-10 scroll-animate">
       Seja um dos primeiros a explorar a rede que está redefinindo conexões digitais.<br>
       Inscreva-se para a beta e comece a criar seu refúgio hoje!
     </p>
-    <div class="flex justify-center items-center mb-6 scroll-animate progress-bar-container">
-      <div class="w-full flex sm:w-64 bg-gray-800 rounded-full h-3 sm:h-4">
-        <div id="progress-bar" class="progress-bar bg-pink-500 h-3 sm:h-4 rounded-full" style="width: 70%;"></div>
+    <div class="flex justify-center items-center mb-2 scroll-animate progress-bar-container">
+      <div class="w-full max-w-sm bg-gray-800 rounded-full h-3 sm:h-4">
+        <div id="progress-bar" class="bg-pink-500 h-3 sm:h-4 rounded-full transition-all duration-500" style="width: 70%;"></div>
       </div>
     </div>
-    <p class="text-xs sm:text-sm text-gray-400 mb-6">70% do caminho para liberar a beta!</p>
-    <div class="flex justify-center scroll-animate">
-      <input type="email" id="email-input" placeholder="Seu e-mail" class="bg-gray-800 text-white p-3 rounded-l-full border border-gray-700 focus:outline-none text-sm sm:text-base">
+    <p class="text-xs sm:text-sm text-gray-400 mb-6" id="progress-text">70% do caminho para liberar a beta!</p>
+    <form class="flex justify-center scroll-animate" onsubmit="return false;">
+      <input type="email" id="email-input" placeholder="Seu e-mail" class="bg-gray-800 text-white p-3 rounded-l-full border border-gray-700 focus:outline-none focus:border-pink-500 transition-colors text-sm sm:text-base w-64">
       <button id="signup-button" class="bg-pink-500 hover:bg-pink-600 text-white font-bold p-3 rounded-r-full transition-colors duration-300 text-sm sm:text-base">Inscrever-se</button>
-    </div>
+    </form>
   </section>
 
-  <!-- Footer -->
   <footer class="py-12 px-4 sm:px-8 bg-gray-950 text-center border-t border-gray-800">
     <p class="text-gray-400 text-xs sm:text-sm mb-4">© 2025 Platypus. Todos os direitos reservados.</p>
     <div class="flex justify-center gap-4 sm:gap-6">
@@ -310,104 +176,6 @@
     </div>
   </footer>
 
-  <script>
-    // Hamburger Menu Toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-
-    // Smooth Scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        navLinks.classList.remove('active');
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // Parallax Effect (Reduced on Mobile)
-    window.addEventListener('scroll', () => {
-      const parallax = document.querySelector('.parallax-bg');
-      const scrollPosition = window.pageYOffset;
-      const isMobile = window.innerWidth <= 768;
-      parallax.style.transform = `translateY(${scrollPosition * (isMobile ? 0.2 : 0.5)}px)`;
-    });
-
-    // Scroll-Triggered Animations
-    const scrollElements = document.querySelectorAll('.scroll-animate');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.2 });
-    scrollElements.forEach(el => observer.observe(el));
-
-    // Mascot Gallery Interaction
-    const mascots = document.querySelectorAll('.mascot-gallery');
-    const descBox = document.getElementById('mascot-description');
-    mascots.forEach(mascot => {
-      mascot.addEventListener('click', () => {
-        descBox.textContent = mascot.dataset.desc;
-        descBox.classList.remove('hidden');
-        setTimeout(() => descBox.classList.add('hidden'), 3000);
-      });
-    });
-
-    // Carousel with Swipe Support
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(${(i - index) * 100}%)`;
-      });
-    }
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      showSlide(currentSlide);
-    }
-    setInterval(nextSlide, 5000);
-    showSlide(currentSlide);
-
-    // Swipe Detection
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const carousel = document.getElementById('carousel');
-    carousel.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-    carousel.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50) nextSlide();
-      if (touchEndX - touchStartX > 50) prevSlide();
-    });
-
-    // FAQ Toggle
-    function toggleFAQ(button) {
-      const content = button.nextElementSibling;
-      content.classList.toggle('hidden');
-    }
-
-    // Confetti on Sign-Up
-    document.getElementById('signup-button').addEventListener('click', () => {
-      const isMobile = window.innerWidth <= 768;
-      confetti({
-        particleCount: isMobile ? 50 : 100,
-        spread: isMobile ? 50 : 70,
-        origin: { y: 0.6 }
-      });
-      const progressBar = document.getElementById('progress-bar');
-      progressBar.style.width = `${Math.min(parseInt(progressBar.style.width) + 5, 100)}%`;
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

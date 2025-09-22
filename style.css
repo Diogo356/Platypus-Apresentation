@@ -1,0 +1,50 @@
+/* Animações de entrada */
+.animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  /* Animações de scroll */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Fundo da seção hero com efeito parallax */
+  .parallax-bg {
+    background-color: #030712; /* Cor de fundo (Tailwind gray-950) */
+    position: absolute;
+    top: -10%; /* Inicia um pouco mais acima para cobrir a área durante o scroll */
+    left: 0;
+    width: 100%;
+    height: 120%; /* Altura extra para evitar espaços em branco */
+    z-index: -1;
+    transition: transform 0.1s ease-out; /* Transição mais suave */
+  }
+  
+  /* Animação de erro para o input */
+  .animate-shake {
+    animation: shake 0.4s ease;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  
+  /* Ajuste fino para o conteúdo do FAQ */
+  .faq-content {
+      /* Adicione estilos de transição se desejar, mas hidden/block é mais simples */
+      transition: max-height 0.3s ease-out;
+  }
